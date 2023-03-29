@@ -1,7 +1,7 @@
 # Kubernetes_Vertical_Pod_Autoscaling_Using_RL
 ## Setup Kubernetes Cluster
 
-The implementation of FIRM is based on Kubernetes.
+
 
 ### Install Docker
 
@@ -29,40 +29,44 @@ http://apt.kubernetes.io/ kubernetes-xenial main"`.
 
 ### Deploy Kubernetes
 
-[**BOTH NODES** Disable the swap memory on each server: `sudo swapoff 
+**ALL NODES**
+ - Disable the swap memory on each server: `sudo swapoff 
 -a`.
-Assign unique hostname for each server node: `sudo 
-hostnamectl set-hostname your_hostname`.
-- [**HOST**] Initialize Kubernetes on the master node: `sudo kubeadm init 
+-  Assign unique hostname for each server node: `sudo 
+hostnamectl set-hostname your_hostname`. <br>
+
+**HOST** 
+- Initialize Kubernetes on the master node: `sudo kubeadm init 
 --pod-network-cidr=10.244.0.0/16`.
     - Once this command finishes, it will display a `kubeadm join` message 
 at the end. Make a note of the whole entry because it will be used to join 
 the worker nodes to the cluster.
     - `--pod-network-cidr=10.244.0.0/16` is for the flannel virtual 
 network to work.
-- [**HOST**] Create a directory for the cluster:
+-  Create a directory for the cluster:
     - `mkdir -p $HOME/.kube`;
     - `sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config`;
     - `sudo chown $(id -u):$(id -g) $HOME/.kube/config`;
-- [**HOST**] Deploy pod network to the cluster. A pod network is a way to 
-allow communication between different nodes in the cluster.
+-  Deploy pod network to the cluster. 
     - `sudo kubectl apply -f 
 https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`;
     - Verify the pod network is working: `kubectl get pods 
---all-namespaces`;
-- [**WORKER**] Connect each worker node to the cluster.
+--all-namespaces`; <br>
+
+**WORKER** 
+- Connect each worker node to the cluster.
     - `sudo kubeadm join --discovery-token abcdef.1234567890abcdef 
 --discovery-token-ca-cert-hash ` (replace the alphanumeric codes with 
 those from your master server during initialization);
     - If you forget the command or the token is expired, run `kubeadm 
 token create --print-join-command` from the master server to get a new 
-token.
-- [**MASTER**] Check the worker nodes joined to the clusster: `kubectl get 
+token.<br>
+
+**HOST** 
+ - Check the worker nodes joined to the cluster: `kubectl get 
 nodes`. You should have something like this:
 
 
-
-```
 
 
 

@@ -36,13 +36,4 @@ run the following command:</p>
 installed.</p>
 
 
-\# Steps to start the app
-
-`1. Apply deployment and service YAML files using the following commands:     kubectl apply -f ~/demoapp/deployment.yaml     kubectl apply -f ~/demoapp/service.yaml 2. Check pod usage with the following command:     kubectl top pods 3. Apply deployment YAML file again with the following command:     kubectl apply -f ~/demoapp/deployment.yaml`
-
-To run the load generator, use the following command:
-`sudo python3 loadgen.py`
-
-To run RL, use the following command:
-`sudo python3 rl.py`
 

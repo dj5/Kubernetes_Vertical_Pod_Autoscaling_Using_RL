@@ -155,13 +155,13 @@ kubectl top pods
 kubectl apply -f ~/demoapp/deployment.yaml
 ```
 
-### To run the load generator, use the following command:
+## To run the load generator, use the following command:
 
 ```
 sudo python loadgen.py
 ```
 
-### To run RL, use the following command:
+## To run RL, use the following command:
 
 ```
 sudo python rl.py

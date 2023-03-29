@@ -64,7 +64,110 @@ token.<br>
 
 **HOST** 
  - Check the worker nodes joined to the cluster: `kubectl get 
-nodes`. You should have something like this:
+nodes`. 
+
+### Kubernetes Metric Server Installation Steps 
+1. Download the metric server manifest file using the following command:
+
+```arduino
+
+curl -L https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml -o metric-server.yaml
+``` 
+2. Open the metric-server.yaml file and search for the following lines:
+
+```less
+
+args:
+  - --cert-dir=/tmp
+  - --secure-port=4443
+``` 
+3. Add the following line below the lines mentioned in step 2:
+
+```css
+
+- --kubelet-insecure-tls
+```
+
+This enables the metric server to communicate with the kubelet securely. 
+4. Apply the metric-server.yaml file using the following command:
+
+```
+
+kubectl apply -f metric-server.yaml
+``` 
+5. Wait for the metric server to start by checking the pod status with the following command:
+
+```sql
+
+kubectl get pods -n kube-system
+```
+
+The output should show a running pod for the metric server. 
+6. Verify that the metric server is working properly by running the following command:
+
+```css
+
+kubectl top nodes
+```
+### Apache Benchmark Installation Steps 
+1. Check if Apache is already installed on your system using the following command:
+
+```
+
+apache2 -v
+```
+
+If Apache is not installed, proceed to step 2. If Apache is already installed, skip to step 4. 
+2. Install Apache using the following command:
+
+```sql
+
+sudo apt-get update
+sudo apt-get install apache2
+```
+3. Check the Apache version again using the command in step 1 to verify that it was installed successfully. 
+4. Install Apache Benchmark using the following command:
+
+```arduino
+
+sudo apt-get install apache2-utils
+``` 
+5. Verify that Apache Benchmark was installed successfully by running the following command:
+
+```
+
+ab -V
+```
+### Steps to start the app
+
+
+1. Apply deployment and service YAML files using the following commands:     
+```
+kubectl apply -f ~/demoapp/deployment.yaml
+kubectl apply -f ~/demoapp/service.yaml
+```
+2. Check pod usage with the following command:
+```
+kubectl top pods
+``` 
+3. Apply deployment YAML file again with the following command:     
+```
+kubectl apply -f ~/demoapp/deployment.yaml
+```
+
+### To run the load generator, use the following command:
+
+```
+sudo python loadgen.py
+```
+
+### To run RL, use the following command:
+
+```
+sudo python rl.py
+```
+
+
 
 
 

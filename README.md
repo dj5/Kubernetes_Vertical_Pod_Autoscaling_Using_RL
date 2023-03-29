@@ -29,9 +29,9 @@ http://apt.kubernetes.io/ kubernetes-xenial main"`.
 
 ### Deploy Kubernetes
 
-- [**BOTH NODES**] Disable the swap memory on each server: `sudo swapoff 
+[**BOTH NODES** Disable the swap memory on each server: `sudo swapoff 
 -a`.
-- [**BOTH NODES**] Assign unique hostname for each server node: `sudo 
+Assign unique hostname for each server node: `sudo 
 hostnamectl set-hostname your_hostname`.
 - [**HOST**] Initialize Kubernetes on the master node: `sudo kubeadm init 
 --pod-network-cidr=10.244.0.0/16`.

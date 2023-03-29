@@ -66,7 +66,7 @@ token.<br>
  - Check the worker nodes joined to the cluster: `kubectl get 
 nodes`. 
 
-### Kubernetes Metric Server Installation Steps 
+## Kubernetes Metric Server Installation Steps 
 1. Download the metric server manifest file using the following command:
 
 ```arduino
@@ -109,7 +109,7 @@ The output should show a running pod for the metric server.
 
 kubectl top nodes
 ```
-### Apache Benchmark Installation Steps 
+## Apache Benchmark Installation Steps 
 1. Check if Apache is already installed on your system using the following command:
 
 ```
@@ -138,7 +138,7 @@ sudo apt-get install apache2-utils
 
 ab -V
 ```
-### Steps to start the app
+## Steps to start the app
 
 
 1. Apply deployment and service YAML files using the following commands:     
